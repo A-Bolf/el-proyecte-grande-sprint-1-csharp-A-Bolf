@@ -6,6 +6,9 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import ModalContext from "./Context/ModalContext";
+import ReusableModal from "./Modal/ReusableModal";
+import { useContext } from "react";
 import { API_ENDPOINT } from "../App";
 
 export default function TicketCard({
@@ -18,6 +21,9 @@ export default function TicketCard({
     axios.delete(`${API_ENDPOINT}/api/ticket/delete/${update.id}`);
     onDelete(update);
   };
+
+  const { toggleModal, showModal, setModalContent } = useContext(ModalContext);
+
   return (
     <Card className="ticket" sx={{ minWidth: 275 }}>
       <CardContent>
@@ -48,7 +54,16 @@ export default function TicketCard({
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
+        <Button
+          size="small"
+          onClick={() => {
+            toggleModal();
+            console.log("CLICK" + showModal);
+            setModalContent(update);
+          }}
+        >
+          Edit
+        </Button>
         <Button onClick={onDeleteClick} size="small">
           Delete
         </Button>
