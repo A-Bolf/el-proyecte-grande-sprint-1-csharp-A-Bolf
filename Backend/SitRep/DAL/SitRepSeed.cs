@@ -16,6 +16,7 @@ public class SitRepSeed
 
     public void Seed()
     {
+        context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
         if (!context.Tickets.Any())
         {
@@ -41,7 +42,7 @@ public class SitRepSeed
             context.Users.AddRange(
                 new User
                 {
-                    UserName = "User1", PasswordHash = ""
+                    UserName = "user", PasswordHash = BCrypt.Net.BCrypt.HashPassword("pass")
                 });
             context.SaveChanges();
         }

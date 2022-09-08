@@ -10,6 +10,7 @@ import IssuesPage from "./components/IssuesPage";
 import Register from "./components/Registration/Register";
 import { ModalProvider } from "./components/Context/ModalContext";
 import { TicketProvider } from "./components/Context/TicketContext";
+import UserProfile from "./components/UserProfile/UserProfile";
 export const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const convertDate = (tickets) => {
@@ -97,10 +98,11 @@ function App() {
                   />
                 }
               />
+
               <Route path="add-issue" element={<CreateTicket />} />
               <Route path="issues" element={<IssuesPage tickets={Tickets} />} />
+              <Route path="Profile" element={<UserProfile />} />
             </Route>
-            <Route path="/register" element={<Register />} />
           </Routes>
         </ModalProvider>
       </TicketProvider>

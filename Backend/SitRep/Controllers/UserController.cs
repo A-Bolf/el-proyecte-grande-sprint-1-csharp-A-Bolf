@@ -48,5 +48,12 @@ public class AuthController : ControllerBase
 
         return Ok(token);
     }
-    
+
+    [HttpPost("UpdatePassword")]
+    public async Task<ActionResult<User>> UpdatePassword([FromBody]UserDTO userDto)
+    {
+        _userService.UpdatePassword(userDto);
+        return Ok(userDto.FromDto());
+    }
+
 }

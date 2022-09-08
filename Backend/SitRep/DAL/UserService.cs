@@ -44,11 +44,16 @@ public class UserService : IUserService
         _context.Users.AddRange(user);
         _context.SaveChanges();
     }
-    
+
+    public User GetByName(string username)
+    {
+        return _context.Users.First(u => u.UserName == username);
+    }
+
 
     public bool VerifyPasswordHash(UserDTO userDto)
     {
-        var user = GetUserByName(userDto.UserName);
+        var user = GetByName(userDto.UserName);
         return BCrypt.Net.BCrypt.Verify(userDto.Password,user.PasswordHash);
 
     }
@@ -84,12 +89,14 @@ public class UserService : IUserService
         return jwt;
     }
 
-    public void Update(UserDTO userDto)
+    public void UpdatePassword(UserDTO userDto)
     {
-        var user= userDto.FromDto();
-        _context.Users.Update(user);
+        var user = GetByName(userDto.UserName);
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+        _context.Update(user);
         _context.SaveChanges();
     }
+
 
     public void Delete(long id)
     {
@@ -102,10 +109,4 @@ public class UserService : IUserService
     {
         return _context.Users.FirstOrDefault(user => user.id == id);
     }
-
-
-    public User GetUserByName(string username)
-    {
-        return _context.Users.FirstOrDefault(user => user.UserName == username);
     }
-}
