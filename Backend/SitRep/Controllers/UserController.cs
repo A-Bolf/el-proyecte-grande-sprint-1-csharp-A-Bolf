@@ -18,6 +18,12 @@ public class AuthController : ControllerBase
     {
         _userService = userService;
     }
+    
+    [HttpGet("users")]
+    public IActionResult GetAll()
+    {
+        return Ok(_userService.GetAllUserNames());
+    }
 
     [HttpPost("register")]
     public async Task<ActionResult<User>> Register(UserDTO userDto)

@@ -23,6 +23,17 @@ public class UserService : IUserService
         return _context.Users.ToList();
     }
 
+    public IEnumerable<string> GetAllUserNames()
+    {
+        List<string> userNames = new List<string>();
+        foreach (var user in _context.Users)
+        {
+            userNames.Add(user.UserName);
+        }
+
+        return userNames;
+    }
+
     public void Register(UserDTO userDto)
     {
         var user = userDto.FromDto();

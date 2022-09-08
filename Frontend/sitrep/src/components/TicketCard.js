@@ -10,6 +10,7 @@ import ModalContext from "./Context/ModalContext";
 import ReusableModal from "./Modal/ReusableModal";
 import { useContext } from "react";
 import { API_ENDPOINT } from "../App";
+import EditTicket from "./EditTicket";
 
 export default function TicketCard({
   update,
@@ -59,7 +60,7 @@ export default function TicketCard({
           onClick={() => {
             toggleModal();
             console.log("CLICK" + showModal);
-            setModalContent(update);
+            setModalContent(<EditTicket ticket={update}></EditTicket>);
           }}
         >
           Edit

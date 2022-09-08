@@ -6,6 +6,7 @@ namespace SitRep.DAL;
 public interface IUserService
 {
     public IEnumerable<User> GetAll();
+    public IEnumerable<string> GetAllUserNames();
     public User GetById(long id);
     public void Register(UserDTO userDto);
     public bool VerifyPasswordHash(UserDTO userDto);
