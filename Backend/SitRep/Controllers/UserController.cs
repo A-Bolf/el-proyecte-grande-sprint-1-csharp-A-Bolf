@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SitRep.Core.Entities;
 using SitRep.DAL;
 using SitRep.Models;
 
@@ -27,7 +28,7 @@ public class AuthController : ControllerBase
         RegiterUserDTO regiterUserDTO = new RegiterUserDTO
 
         {
-            Id = user.id,
+            Id = user.Id,
             UserName = user.UserName,
         };
         return (Ok(regiterUserDTO));

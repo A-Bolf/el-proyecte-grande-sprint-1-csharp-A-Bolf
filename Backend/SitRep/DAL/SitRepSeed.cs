@@ -1,5 +1,5 @@
-using SitRep.Models;
-using SitRep.Models.Types;
+
+using SitRep.Core.Entities;
 
 namespace SitRep.DAL;
 
@@ -47,18 +47,6 @@ public class SitRepSeed
             context.SaveChanges();
         }
 
-        if (!context.Projects.Any())
-        {
-            context.Projects.AddRange(
-                new Project
-                {
-                    Name = "Project1"
-                },
-                new Project
-                {
-                    Name = "Project1"
-                });
-            context.SaveChanges();
-        }
+       
     }
 }

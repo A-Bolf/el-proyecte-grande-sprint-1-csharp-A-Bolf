@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SitRep.Core.Entities;
 using SitRep.Models;
 
 namespace SitRep.DAL;

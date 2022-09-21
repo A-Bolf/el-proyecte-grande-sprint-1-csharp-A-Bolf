@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using SitRep.Core.Entities;
 using SitRep.DAL;
 using SitRep.Models;
-using SitRep.Models.Types;
 
 namespace SitRep.DAL;
 
