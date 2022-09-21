@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SitRep.Core;
 using SitRep.Core.Entities;
+using SitRep.Core.UseCases.DeleteTicket;
 using SitRep.Core.UseCases.GetAllTickets;
 using SitRep.DAL;
 using SitRep.DAL;
@@ -78,8 +79,19 @@ public IActionResult Update([FromBody] Ticket ticket)
 [HttpDelete("/api/ticket/delete/{id}")]
 public IActionResult Delete([FromRoute] int id)
 {
-    _ticketService.Delete(id);
-    return Ok();
+    DeleteTicketRequest request = new DeleteTicketRequest(id);
+    DeleteTicketHandler handler = new DeleteTicketHandler(_context);
+    var response = handler.Handle(request);
+    if (response.Failure)
+    {
+        _logger.LogError(response.Error);
+    }
+    else
+    {
+        _logger.LogInformation("Delete successful!");
+    }
+
+    return Ok(response);
 }
 
 
