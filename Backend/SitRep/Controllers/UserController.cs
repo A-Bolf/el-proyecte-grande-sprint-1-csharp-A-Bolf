@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
         RegiterUserDTO regiterUserDTO = new RegiterUserDTO
 
         {
-            Id = user.id,
+            Id = user.Id,
             UserName = user.UserName,
         };
         return (Ok(regiterUserDTO));
