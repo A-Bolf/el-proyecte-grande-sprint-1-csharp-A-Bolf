@@ -21,10 +21,17 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<User>> Register(UserDTO userDto)
+    public async Task<ActionResult<RegiterUserDTO>> Register(UserDTO userDto)
     {
-        _userService.Register(userDto);
-        return (Ok(userDto.FromDto()));
+        var user = _userService.Register(userDto);
+        if (user == null) return BadRequest();
+        RegiterUserDTO regiterUserDTO = new RegiterUserDTO
+
+        {
+            Id = user.id,
+            UserName = user.UserName,
+        };
+        return (Ok(regiterUserDTO));
     }
 
     [HttpPost("login")]

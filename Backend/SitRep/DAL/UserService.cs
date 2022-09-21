@@ -24,7 +24,7 @@ public class UserService : IUserService
         return _context.Users.ToList();
     }
 
-    public void Register(UserDTO userDto)
+    public User Register(UserDTO userDto)
     {
         var user = userDto.FromDto();
         if (_context.Users.Any(u => u.UserName == user.UserName))
@@ -33,6 +33,7 @@ public class UserService : IUserService
         }
         _context.Users.AddRange(user);
         _context.SaveChanges();
+        return user;
     }
 
     public User GetByName(string username)

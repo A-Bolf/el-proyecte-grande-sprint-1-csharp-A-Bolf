@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Auth\register_expected.json" />
+		<None Remove="Resources\Auth\register_request.json" />
+		<None Remove="Resources\Auth\user.json" />
+		<None Remove="Resources\Ticket\AddNewTicket\request.json" />
+		<None Remove="Resources\Ticket\AddNewTicket\response.json" />
+		<None Remove="Resources\Ticket\alltickets.json" />
+		<None Remove="Resources\Ticket\ByTicketId\response.json" />
+		<None Remove="Resources\Ticket\RetriveUpdates\response.json" />
+		<None Remove="Resources\Ticket\StatusCounts\response.json" />
+		<None Remove="Resources\Ticket\UpdateTicket\request.json" />
+		<None Remove="Resources\Ticket\UpdateTicket\response.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Auth\register_expected.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Resources\Auth\user.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Resources\Auth\register_request.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Resources\Ticket\AddNewTicket\request.json" />
+		<EmbeddedResource Include="Resources\Ticket\AddNewTicket\response.json" />
+		<EmbeddedResource Include="Resources\Ticket\alltickets.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Resources\Ticket\ByTicketId\response.json" />
+		<EmbeddedResource Include="Resources\Ticket\RetriveUpdates\response.json" />
+		<EmbeddedResource Include="Resources\Ticket\StatusCounts\response.json" />
+		<EmbeddedResource Include="Resources\Ticket\UpdateTicket\request.json" />
+		<EmbeddedResource Include="Resources\Ticket\UpdateTicket\response.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="6.7.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.9" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
+		<PackageReference Include="NUnit" Version="3.13.3" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+		<PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
+		<PackageReference Include="coverlet.collector" Version="3.1.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SitRep\SitRep.csproj" />
+	</ItemGroup>
+
+</Project>

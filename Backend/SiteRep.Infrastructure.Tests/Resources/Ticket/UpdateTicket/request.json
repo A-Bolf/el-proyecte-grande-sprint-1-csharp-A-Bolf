@@ -1,0 +1,19 @@
+{
+  "id": 0,
+  "title": "string",
+  "description": "string",
+  "status": "OPEN",
+  "priority": "LOW",
+  "type": "TASK",
+  "dueDate": "2022-09-20T21:59:48.100Z",
+  "createdDate": "2022-09-20T21:59:48.100Z",
+  "lastUpdatedDate": "2022-09-20T21:59:48.100Z",
+  "assignees": [
+    {
+      "id": 0,
+      "userName": "string",
+      "passwordHash": "string"
+    }
+  ],
+  "creatorID": 0
+}
