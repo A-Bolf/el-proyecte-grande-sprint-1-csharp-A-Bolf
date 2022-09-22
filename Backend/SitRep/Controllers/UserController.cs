@@ -3,7 +3,9 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SitRep.Core;
 using SitRep.Core.Entities;
+using SitRep.Core.UseCases.UpdatePassword;
 using SitRep.DAL;
 using SitRep.Models;
 
@@ -14,12 +16,15 @@ namespace SitRep.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<AuthController> _logger;
+    private readonly ISitRepContext _context;
 
-    public AuthController(IUserService userService)
+    public AuthController(IUserService userService, ISitRepContext sitRepContext, ILogger<AuthController> logger)
     {
+        _logger = logger;
+        _context = sitRepContext;
         _userService = userService;
     }
-
     [HttpPost("register")]
     public async Task<ActionResult<RegiterUserDTO>> Register(UserDTO userDto)
     {
@@ -52,10 +57,21 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("UpdatePassword")]
-    public async Task<ActionResult<User>> UpdatePassword([FromBody]UserDTO userDto)
+    public async Task<ActionResult> UpdatePassword([FromBody]UpdatePasswordRequest request)
     {
-        _userService.UpdatePassword(userDto);
-        return Ok(userDto.FromDto());
+        var handler = new UpdatePasswordHandler(_context);
+        var response = handler.Handle(request);
+        if (response.Failure)
+        {
+            _logger.LogError("Password Change Failed");
+
+        }
+        else
+        {
+            _logger.LogInformation("Password Change Successful");
+        }
+
+        return Ok(response);
     }
 
 }

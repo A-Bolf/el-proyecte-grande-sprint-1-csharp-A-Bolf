@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SitRep.Core;
 using SitRep.Core.Entities;
 
@@ -23,5 +24,10 @@ public class SitRepContext:DbContext, ISitRepContext
     public void SaveChanges()
     {
         base.SaveChanges();
+    }
+
+    EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class
+    {
+        return base.Update(entity);
     }
 }

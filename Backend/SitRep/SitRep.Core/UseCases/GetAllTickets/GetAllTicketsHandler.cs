@@ -5,7 +5,7 @@ namespace SitRep.Core.UseCases.GetAllTickets;
 
 public class GetAllTicketsHandler : IQueryHandler<Response<List<Ticket>>>
 {
-    private ISitRepContext _context;
+    private readonly ISitRepContext _context;
     public GetAllTicketsHandler(ISitRepContext _context)
     {
         this._context = _context;
