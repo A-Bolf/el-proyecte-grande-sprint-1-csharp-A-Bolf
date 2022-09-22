@@ -4,7 +4,7 @@ namespace SitRep.Core.UseCases.CreateTicket;
 
 public class CreateTicketHandler : IRequestHandler<CreateTicketRequest, Response<List<Ticket>>>
 {
-    private ISitRepContext _context;
+    private readonly ISitRepContext _context;
 
     public CreateTicketHandler(ISitRepContext context)
     {
