@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SitRep.Core;
 using SitRep.Core.Entities;
+using SitRep.Core.UseCases.CreateTicket;
 using SitRep.Core.UseCases.DeleteTicket;
 using SitRep.Core.UseCases.GetAllTickets;
 using SitRep.DAL;
@@ -41,11 +42,38 @@ public class TicketController : ControllerBase
         return ticketResponse.Value;
 
     }
+    
+
+[HttpPost]
+public ActionResult<TicketDTO> Create(TicketDTO ticketDTO)
+{
+    var ticketHandler = new CreateTicketHandler(_context);
+    var ticketRequest = new CreateTicketRequest(ticketDTO);
+    Response<List<Ticket>> response = ticketHandler.Handle(ticketRequest);
+
+    if (response.Failure)
+    {
+        _logger.LogError(response.Error);
+    }
+    else
+    {
+        _logger.LogInformation("Ticket Created Successfully");
+    }
+
+    return Ok(response.Value);
+}
 
 [HttpGet("/api/ticket/updates")]
 public IActionResult GetRecentUpdates()
 {
     return Ok(_ticketService.GetRecentUpdates());
+}
+
+[HttpPut("/api/ticket/update")]
+public IActionResult Update([FromBody] Ticket ticket)
+{
+    _ticketService.Update(ticket);
+    return Ok(ticket);
 }
 
 [HttpGet("/api/ticket/statuscounts")]
@@ -58,22 +86,6 @@ public IActionResult GetStatusCounts()
 public IActionResult GetById([FromRoute] int id)
 {
     return Ok(_ticketService.GetById(id));
-}
-
-[HttpPost]
-public ActionResult<TicketDTO> Create(TicketDTO ticketDTO)
-{
-    _ticketService.Add(new Ticket(ticketDTO));
-
-
-    return Ok(_ticketService.GetAll());
-}
-
-[HttpPut("/api/ticket/update")]
-public IActionResult Update([FromBody] Ticket ticket)
-{
-    _ticketService.Update(ticket);
-    return Ok(ticket);
 }
 
 [HttpDelete("/api/ticket/delete/{id}")]
