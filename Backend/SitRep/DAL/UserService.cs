@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
+using SitRep.Core.Entities;
 using SitRep.Models;
 
 namespace SitRep.DAL;
@@ -23,18 +24,8 @@ public class UserService : IUserService
         return _context.Users.ToList();
     }
 
-    public IEnumerable<string> GetAllUserNames()
-    {
-        List<string> userNames = new List<string>();
-        foreach (var user in _context.Users)
-        {
-            userNames.Add(user.UserName);
-        }
 
-        return userNames;
-    }
-
-    public void Register(UserDTO userDto)
+    public User Register(UserDTO userDto)
     {
         var user = userDto.FromDto();
         if (_context.Users.Any(u => u.UserName == user.UserName))
@@ -43,6 +34,7 @@ public class UserService : IUserService
         }
         _context.Users.AddRange(user);
         _context.SaveChanges();
+        return user;
     }
 
     public User GetByName(string username)
@@ -107,6 +99,6 @@ public class UserService : IUserService
 
     public User GetById(long id)
     {
-        return _context.Users.FirstOrDefault(user => user.id == id);
+        return _context.Users.FirstOrDefault(user => user.Id == id);
     }
     }

@@ -1,4 +1,4 @@
-using SitRep.Models.Types;
+using SitRep.Core.Entities;
 
 namespace SitRep.Models;
 

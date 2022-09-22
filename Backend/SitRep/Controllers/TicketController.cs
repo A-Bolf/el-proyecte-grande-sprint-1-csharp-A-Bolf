@@ -1,70 +1,123 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SitRep.Core;
+using SitRep.Core.Entities;
+using SitRep.Core.UseCases.CreateTicket;
+using SitRep.Core.UseCases.DeleteTicket;
+using SitRep.Core.UseCases.GetAllTickets;
+using SitRep.Core.UseCases.UpdateTicket;
 using SitRep.DAL;
 using SitRep.DAL;
 using SitRep.Models;
+using SitRep.SitRep.Core.DTOs;
 
 namespace SitRep.Controllers;
+
 [ApiController]
 [Route("/api/ticket")]
-public class TicketController:ControllerBase
+public class TicketController : ControllerBase
 {
-    private readonly ITicketService _ticketService ;
-    
-    
-    public TicketController(ITicketService ticketService)
+    private readonly ITicketService _ticketService;
+    private readonly ISitRepContext _context;
+    private readonly ILogger<TicketController> _logger;
+    public TicketController(ITicketService ticketService, ISitRepContext sitRepContext, ILogger<TicketController> logger)
     {
-        
+        _logger = logger;
+        _context = sitRepContext;
         _ticketService = ticketService;
     }
-    
+
     [HttpGet("/api/ticket")]
-    public IActionResult GetAll()
+    public ActionResult<List<Core.Entities.Ticket>> GetAll()
     {
-        return Ok(_ticketService.GetAll());
+        var ticketHandler = new GetAllTicketsHandler(_context);
+        var ticketResponse = ticketHandler.Handle();
+        if (ticketResponse.Failure)
+        {
+            _logger.LogError(ticketResponse.Error);
+        }
+        else
+        {
+            _logger.LogInformation("Success!");
+        }
+        return ticketResponse.Value;
+
     }
     
-    [HttpGet("/api/ticket/updates")]
-    public IActionResult GetRecentUpdates()
+
+[HttpPost]
+public ActionResult<TicketDTO> Create(TicketDTO ticketDTO)
+{
+    var ticketHandler = new CreateTicketHandler(_context);
+    var ticketRequest = new CreateTicketRequest(ticketDTO);
+    Response<List<Ticket>> response = ticketHandler.Handle(ticketRequest);
+
+    if (response.Failure)
     {
-        return Ok(_ticketService.GetRecentUpdates());
+        _logger.LogError(response.Error);
+    }
+    else
+    {
+        _logger.LogInformation("Ticket Created Successfully");
     }
 
-    [HttpGet("/api/ticket/statuscounts")]
-    public IActionResult GetStatusCounts()
+    return Ok(response.Value);
+}
+
+[HttpGet("/api/ticket/updates")]
+public IActionResult GetRecentUpdates()
+{
+    return Ok(_ticketService.GetRecentUpdates());
+}
+
+[HttpPut("/api/ticket/update")]
+public IActionResult Update([FromBody] Ticket ticket)
+{
+    
+    UpdateTicketHandler handler = new UpdateTicketHandler(_context);
+    UpdateTicketRequest request = new UpdateTicketRequest(ticket);
+    var response = handler.Handle(request);
+    if (response.Failure)
     {
-        return Ok(_ticketService.GetStatusCounts());
+        _logger.LogError(response.Error);
     }
-    
-    [HttpGet("/api/ticket/{id}")]
-    public IActionResult GetById([FromRoute]int id)
+    else
     {
-        return Ok(_ticketService.GetById(id));
+        _logger.LogInformation("Ticket Updated Successfully");
     }
-    
-    [HttpPost]
-    public ActionResult<TicketDTO> Create(TicketDTO ticketDTO)
+
+    return Ok(response.Value);
+}
+
+[HttpGet("/api/ticket/statuscounts")]
+public IActionResult GetStatusCounts()
+{
+    return Ok(_ticketService.GetStatusCounts());
+}
+
+[HttpGet("/api/ticket/{id}")]
+public IActionResult GetById([FromRoute] int id)
+{
+    return Ok(_ticketService.GetById(id));
+}
+
+[HttpDelete("/api/ticket/delete/{id}")]
+public IActionResult Delete([FromRoute] int id)
+{
+    DeleteTicketRequest request = new DeleteTicketRequest(id);
+    DeleteTicketHandler handler = new DeleteTicketHandler(_context);
+    var response = handler.Handle(request);
+    if (response.Failure)
     {
-        _ticketService.Add(new Ticket(ticketDTO));
-        
-        // _ticketService.Add(ticket);
-        return Ok(_ticketService.GetAll());
+        _logger.LogError(response.Error);
     }
-    
-    [HttpPut("/api/ticket/update")]
-    public IActionResult Update([FromBody]Ticket ticket)
+    else
     {
-        _ticketService.Update(ticket);
-        return Ok(ticket);
+        _logger.LogInformation("Delete successful!");
     }
-    
-    [HttpDelete("/api/ticket/delete/{id}")]
-    public IActionResult Delete([FromRoute]int id)
-    {
-        _ticketService.Delete(id);
-        return Ok();
-    }
-    
-    
+
+    return Ok(response);
+}
+
 
 }

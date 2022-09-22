@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace SitRep.Models.Types;
-[JsonConverter(typeof(JsonStringEnumConverter))]
+ [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TicketType
 {
     TASK,

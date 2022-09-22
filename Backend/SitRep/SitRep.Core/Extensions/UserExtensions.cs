@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using SitRep.Core.Entities;
 
 namespace SitRep.Models;
 

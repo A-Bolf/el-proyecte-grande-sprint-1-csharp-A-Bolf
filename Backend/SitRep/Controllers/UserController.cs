@@ -3,6 +3,9 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SitRep.Core;
+using SitRep.Core.UseCases.UpdatePassword;
+using SitRep.Core.UseCases.UserLogin;
 using SitRep.DAL;
 using SitRep.Models;
 
@@ -13,47 +16,62 @@ namespace SitRep.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<AuthController> _logger;
+    private readonly ISitRepContext _context;
+    private IConfiguration _configuration;
 
-    public AuthController(IUserService userService)
+    public AuthController(IUserService userService, ISitRepContext sitRepContext, ILogger<AuthController> logger,IConfiguration configuration)
     {
+        _logger = logger;
+        _context = sitRepContext;
         _userService = userService;
-    }
-    
-    [HttpGet("users")]
-    public IActionResult GetAll()
-    {
-        return Ok(_userService.GetAllUserNames());
+        _configuration = configuration;
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<User>> Register(UserDTO userDto)
+    public async Task<ActionResult<RegiterUserDTO>> Register(UserDTO userDto)
     {
-        _userService.Register(userDto);
-        return (Ok(userDto.FromDto()));
+        var user = _userService.Register(userDto);
+        if (user == null) return BadRequest();
+        RegiterUserDTO regiterUserDTO = new RegiterUserDTO
+
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+        };
+        return (Ok(regiterUserDTO));
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserDTO userDto)
+    public async Task<ActionResult<string>> Login(LoginRequest request)
     {
-        if (!_userService.VerifyUserExists(userDto))
+        var handler = new LoginHandler(_context, _configuration);
+        var response = handler.Handle(request);
+
+        if (response.Failure)
         {
-            return BadRequest("User Not Found!");
-        }
-        if (!_userService.VerifyPasswordHash(userDto))
-        {
-            return BadRequest("Wrong Password!");
+            return BadRequest(response);
         }
 
-        var token = _userService.CreateToken(userDto);
-
-        return Ok(token);
+        return Ok(response.Value);
     }
 
     [HttpPost("UpdatePassword")]
-    public async Task<ActionResult<User>> UpdatePassword([FromBody]UserDTO userDto)
+    public async Task<ActionResult> UpdatePassword([FromBody]UpdatePasswordRequest request)
     {
-        _userService.UpdatePassword(userDto);
-        return Ok(userDto.FromDto());
+        var handler = new UpdatePasswordHandler(_context);
+        var response = handler.Handle(request);
+        if (response.Failure)
+        {
+            _logger.LogError("Password Change Failed");
+
+        }
+        else
+        {
+            _logger.LogInformation("Password Change Successful");
+        }
+
+        return Ok(response);
     }
 
 }

@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "title": "First Test Ticket",
+  "description": "This is the First Test Ticket in the Seed()",
+  "status": "OPEN",
+  "priority": "MEDIUM",
+  "type": "TASK",
+  "dueDate": "0001-01-01T00:00:00",
+  "createdDate": "2022-09-20T23:53:03.3738271",
+  "lastUpdatedDate": "2022-09-20T23:53:03.37389",
+  "assignees": [],
+  "creatorID": 0
+}

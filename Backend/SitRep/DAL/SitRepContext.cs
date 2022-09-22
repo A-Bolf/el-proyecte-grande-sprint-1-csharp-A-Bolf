@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using SitRep.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using SitRep.Core;
+using SitRep.Core.Entities;
+
 
 namespace SitRep.DAL;
 
-public class SitRepContext:DbContext
+public class SitRepContext:DbContext, ISitRepContext
 {
     public SitRepContext(DbContextOptions<SitRepContext> options):base(options)
     {
@@ -14,10 +17,17 @@ public class SitRepContext:DbContext
     {
         modelBuilder.Entity<Ticket>().ToTable("Ticket");
         modelBuilder.Entity<User>().ToTable("User");
-        modelBuilder.Entity<Project>().ToTable("Project");
     }
 
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<Project> Projects { get; set; }
+    public void SaveChanges()
+    {
+        base.SaveChanges();
+    }
+
+    EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class
+    {
+        return base.Update(entity);
+    }
 }

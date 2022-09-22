@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "title": "First Test Ticket",
+    "description": "This is the First Test Ticket in the Seed()",
+    "status": "OPEN",
+    "priority": "MEDIUM",
+    "type": "TASK",
+    "dueDate": "0001-01-01T00:00:00",
+    "createdDate": "2022-09-20T15:53:30.7079282",
+    "lastUpdatedDate": "2022-09-20T15:53:30.7130535",
+    "assignees": [],
+    "creatorID": 0
+  },
+  {
+    "id": 2,
+    "title": "Second Test Ticket",
+    "description": "This is the Second Test Ticket in the Seed()",
+    "status": "OPEN",
+    "priority": "LOW",
+    "type": "TASK",
+    "dueDate": "0001-01-01T00:00:00",
+    "createdDate": "2022-09-20T15:53:30.7133209",
+    "lastUpdatedDate": "2022-09-20T15:53:30.713323",
+    "assignees": [],
+    "creatorID": 0
+  }
+]

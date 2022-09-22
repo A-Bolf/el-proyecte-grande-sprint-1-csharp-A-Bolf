@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using SitRep.Core.Entities;
 using SitRep.Models;
-using SitRep.Models.Types;
 
 namespace SitRep.DAL;
 
