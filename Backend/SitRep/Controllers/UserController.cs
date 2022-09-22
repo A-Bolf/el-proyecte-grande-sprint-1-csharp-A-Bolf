@@ -4,6 +4,8 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SitRep.Core;
+using SitRep.Core.Entities;
+using SitRep.Core.UseCases.RegisterUser;
 using SitRep.Core.UseCases.UpdatePassword;
 using SitRep.Core.UseCases.UserLogin;
 using SitRep.DAL;
@@ -29,17 +31,18 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<RegiterUserDTO>> Register(UserDTO userDto)
+    public async Task<ActionResult<User>> Register(RegisterUserRequest userDto)
     {
-        var user = _userService.Register(userDto);
-        if (user == null) return BadRequest();
-        RegiterUserDTO regiterUserDTO = new RegiterUserDTO
-
+        RegisterUserHandler registerNewUserHandler = new RegisterUserHandler(_context);
+        var response = registerNewUserHandler.Handle(userDto);
+        if (response.Failure)
         {
-            Id = user.Id,
-            UserName = user.UserName,
-        };
-        return (Ok(regiterUserDTO));
+            _logger.LogError(response.Error);
+            return BadRequest(response.Error);
+        }
+        _logger.LogInformation("User registered");
+        var registerUserResponse = response.Value.ToRegisterUserResponse();
+        return (Ok(registerUserResponse));
     }
 
     [HttpPost("login")]

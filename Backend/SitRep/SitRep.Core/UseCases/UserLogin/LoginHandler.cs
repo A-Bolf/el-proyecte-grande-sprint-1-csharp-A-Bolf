@@ -24,7 +24,7 @@ public class LoginHandler:IRequestHandler<LoginRequest,Response<string>>
             return Response.Fail<string>("User not found");
         }
 
-        if (user.PasswordHash!=passwordHash)
+        if (!BCrypt.Net.BCrypt.Verify(message.Password,passwordHash))
         {
             return Response.Fail<string>("Incorrect Password");
         }
