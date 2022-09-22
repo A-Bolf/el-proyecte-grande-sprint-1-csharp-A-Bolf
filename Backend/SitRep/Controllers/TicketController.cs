@@ -5,6 +5,7 @@ using SitRep.Core.Entities;
 using SitRep.Core.UseCases.CreateTicket;
 using SitRep.Core.UseCases.DeleteTicket;
 using SitRep.Core.UseCases.GetAllTickets;
+using SitRep.Core.UseCases.UpdateTicket;
 using SitRep.DAL;
 using SitRep.DAL;
 using SitRep.Models;
@@ -72,8 +73,20 @@ public IActionResult GetRecentUpdates()
 [HttpPut("/api/ticket/update")]
 public IActionResult Update([FromBody] Ticket ticket)
 {
-    _ticketService.Update(ticket);
-    return Ok(ticket);
+    
+    UpdateTicketHandler handler = new UpdateTicketHandler(_context);
+    UpdateTicketRequest request = new UpdateTicketRequest(ticket);
+    var response = handler.Handle(request);
+    if (response.Failure)
+    {
+        _logger.LogError(response.Error);
+    }
+    else
+    {
+        _logger.LogInformation("Ticket Updated Successfully");
+    }
+
+    return Ok(response.Value);
 }
 
 [HttpGet("/api/ticket/statuscounts")]
