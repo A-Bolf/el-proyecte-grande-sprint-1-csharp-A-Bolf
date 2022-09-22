@@ -24,6 +24,7 @@ public class UserService : IUserService
         return _context.Users.ToList();
     }
 
+
     public User Register(UserDTO userDto)
     {
         var user = userDto.FromDto();

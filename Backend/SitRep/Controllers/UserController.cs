@@ -27,6 +27,7 @@ public class AuthController : ControllerBase
         _userService = userService;
         _configuration = configuration;
     }
+
     [HttpPost("register")]
     public async Task<ActionResult<RegiterUserDTO>> Register(UserDTO userDto)
     {

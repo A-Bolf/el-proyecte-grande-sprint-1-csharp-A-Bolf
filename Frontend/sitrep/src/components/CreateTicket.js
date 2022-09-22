@@ -33,7 +33,7 @@ const CreateTicket = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Task");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("LOW");
+  const [priority, setPriority] = useState("low");
   const [category, setCategory] = useState("new feature");
   const [assignee, setAssignee] = useState("user1");
   const [date, setDate] = useState(new Date());

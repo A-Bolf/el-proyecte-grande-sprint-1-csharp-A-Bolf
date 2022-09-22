@@ -7,6 +7,7 @@ namespace SitRep.DAL;
 public interface IUserService
 {
     public IEnumerable<User> GetAll();
+    public IEnumerable<string> GetAllUserNames();
     public User GetById(long id);
     public User Register(UserDTO userDto);
 
