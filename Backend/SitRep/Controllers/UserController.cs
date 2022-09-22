@@ -4,8 +4,8 @@ using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SitRep.Core;
-using SitRep.Core.Entities;
 using SitRep.Core.UseCases.UpdatePassword;
+using SitRep.Core.UseCases.UserLogin;
 using SitRep.DAL;
 using SitRep.Models;
 
@@ -18,12 +18,14 @@ public class AuthController : ControllerBase
     private readonly IUserService _userService;
     private readonly ILogger<AuthController> _logger;
     private readonly ISitRepContext _context;
+    private IConfiguration _configuration;
 
-    public AuthController(IUserService userService, ISitRepContext sitRepContext, ILogger<AuthController> logger)
+    public AuthController(IUserService userService, ISitRepContext sitRepContext, ILogger<AuthController> logger,IConfiguration configuration)
     {
         _logger = logger;
         _context = sitRepContext;
         _userService = userService;
+        _configuration = configuration;
     }
     [HttpPost("register")]
     public async Task<ActionResult<RegiterUserDTO>> Register(UserDTO userDto)
@@ -40,20 +42,17 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserDTO userDto)
+    public async Task<ActionResult<string>> Login(LoginRequest request)
     {
-        if (!_userService.VerifyUserExists(userDto))
+        var handler = new LoginHandler(_context, _configuration);
+        var response = handler.Handle(request);
+
+        if (response.Failure)
         {
-            return BadRequest("User Not Found!");
-        }
-        if (!_userService.VerifyPasswordHash(userDto))
-        {
-            return BadRequest("Wrong Password!");
+            return BadRequest(response);
         }
 
-        var token = _userService.CreateToken(userDto);
-
-        return Ok(token);
+        return Ok(response.Value);
     }
 
     [HttpPost("UpdatePassword")]
