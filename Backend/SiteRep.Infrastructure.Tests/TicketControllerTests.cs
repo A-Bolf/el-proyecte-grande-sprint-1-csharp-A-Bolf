@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using SitRep.Core.Entities;
+using SitRep.Models;
 
 namespace SiteRep.Infrastructure.Tests
 {
