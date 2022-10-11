@@ -9,7 +9,6 @@ public class TicketDTO
     public string Description { get; set; }
     public StatusType Status { get; set; }
     public PriorityType Priority { get; set; }
-    public TicketType Type { get; set; }
     public DateTime DueDate { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime LastUpdatedDate { get; set; }

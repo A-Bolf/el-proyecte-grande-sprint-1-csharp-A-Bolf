@@ -26,7 +26,6 @@ public class UpdateTicketHandler : IRequestHandler<UpdateTicketRequest, Response
         ticketToUpdate.Priority = message.Ticket.Priority;
         ticketToUpdate.Status = message.Ticket.Status;
         ticketToUpdate.Title = message.Ticket.Title;
-        ticketToUpdate.Type = message.Ticket.Type;
         ticketToUpdate.CreatedDate = message.Ticket.CreatedDate;
         ticketToUpdate.DueDate = message.Ticket.DueDate;
         ticketToUpdate.CreatorID = message.Ticket.CreatorID;
