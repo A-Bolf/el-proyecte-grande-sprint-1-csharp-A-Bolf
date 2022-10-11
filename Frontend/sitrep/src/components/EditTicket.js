@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import { API_ENDPOINT } from "../App";
 
 const EditTicket = ({ ticket }) => {
-  const { users, type, priority, category, status } = useContext(TicketContext);
+  const { type, priority, category, status } = useContext(TicketContext);
 
   const sendUpdatedTicket = (event) => {
     event.preventDefault();
@@ -19,11 +19,15 @@ const EditTicket = ({ ticket }) => {
     const ticket = {
       title: data.get("title"),
       description: data.get("description"),
-      type: data.get("type"),
-      assignee: data.get("assignee"),
-      priority: data.get("priority"),
-      category: data.get("category"),
       status: data.get("status"),
+      priority: data.get("priority"),
+      type: data.get("type"),
+      //there's no due date field in the backend
+      dueDate: new Date(),
+      lastUpdatedDate: new Date(),
+      assignees: [data.get("assignee")],
+      //there is no caregory field in the backend
+      //category: data.get("category"),
     };
     console.log(ticket);
     console.log("COLLECTED TICKET");
@@ -85,10 +89,10 @@ const EditTicket = ({ ticket }) => {
             id="assignee"
             name="assignee"
             label="Assignee: "
-            options={users}
+            options={["User1", "User2"]}
             defaultValue={ticket.assignees}
           >
-            {users.map((user) => (
+            {["User1", "User2"].map((user) => (
               <MenuItem value={user}>{user}</MenuItem>
             ))}
           </Select>
@@ -115,7 +119,7 @@ const EditTicket = ({ ticket }) => {
             ))}
           </Select>
           <Button variant="contained" type="submit">
-            Contained
+            Edit
           </Button>
         </CardContent>
       </Card>

@@ -10,15 +10,15 @@ const category = ["new feature", "bugfix"];
 //gonna have to replace this with a fetch all users
 
 export const TicketProvider = ({ children }) => {
-  const [users, setUsers] = useState("");
-  useEffect(() => {
-    axios.get(`${API_ENDPOINT}/api/Auth/users`).then((result) => {
-      console.log(result.data + "RESULT!!!");
-      setUsers(result.data);
-    });
-  }, []);
+  //   const [users, setUsers] = useState("");
+  //   useEffect(() => {
+  //     axios.get(`${API_ENDPOINT}/api/Auth/users`).then((result) => {
+  //       console.log(result.data + "RESULT!!!");
+  //       setUsers(result.data);
+  //     });
+  //   }, []);
   return (
-    <TicketContext.Provider value={{ type, priority, category, users, status }}>
+    <TicketContext.Provider value={{ type, priority, category, status }}>
       {children}
     </TicketContext.Provider>
   );
