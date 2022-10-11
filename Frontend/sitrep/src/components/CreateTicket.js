@@ -3,7 +3,7 @@ import CreateTicketButtons from "./CreateTicketButtons";
 import Dropdown from "./Dropdown";
 import { API_ENDPOINT } from "../App";
 import { TextField } from "@mui/material";
-
+const token = localStorage.getItem("token");
 const CreateTicket = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,10 @@ const CreateTicket = () => {
     const tempURL = `${API_ENDPOINT}/api/ticket`;
     fetch(tempURL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(ticket),
     })
       .then(() => {

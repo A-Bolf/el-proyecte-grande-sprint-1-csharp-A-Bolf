@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SitRep.Core;
@@ -59,6 +60,7 @@ public class AuthController : ControllerBase
         return Ok(response.Value);
     }
 
+    [Authorize]
     [HttpPost("UpdatePassword")]
     public async Task<ActionResult> UpdatePassword([FromBody]UpdatePasswordRequest request)
     {

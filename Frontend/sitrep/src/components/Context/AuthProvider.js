@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
+    localStorage.removeItem("token");
     setAuth({});
     navigate("/");
   };
@@ -51,11 +52,7 @@ export const AuthProvider = ({ children }) => {
         console.log(res.data);
         let accessToken = res?.data;
         setAuth({ username, password, accessToken });
-        sessionStorage.user = JSON.stringify({
-          username,
-          password,
-          accessToken,
-        });
+        localStorage.setItem("token", accessToken);
         navigate("/app/dashboard");
       })
       .catch((error) => {
