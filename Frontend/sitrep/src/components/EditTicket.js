@@ -7,26 +7,47 @@ import axios from "axios";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
+import ModalContext from "./Context/ModalContext";
 import { API_ENDPOINT } from "../App";
 
 const EditTicket = ({ ticket }) => {
-  const { priority, status } = useContext(TicketContext);
-
+  const { priority, status, setTickets, Tickets } = useContext(TicketContext);
+  const { toggleModal } = useContext(ModalContext);
   const sendUpdatedTicket = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log(ticket, "Current");
     const newTicket = {
       id: ticket.id,
+      assignees: [
+        {
+          id: 0,
+          userName: "string",
+          passwordHash: "string",
+        },
+      ],
       title: data.get("title"),
       description: data.get("description"),
       status: data.get("status"),
       priority: data.get("priority"),
-      createdDate: ticket.createdDate,
-      assignees: [{ id: 2, userName: "string", passwordHash: "string" }],
     };
     console.log(newTicket, "collected");
-    axios.put(`${API_ENDPOINT}/api/ticket/update`, newTicket);
+    axios
+      .put(`${API_ENDPOINT}/api/ticket/update`, newTicket)
+      .then((response) => {
+        let ticket = response.data;
+        var foundIndex = Tickets.findIndex((x) => x.id === ticket.id);
+        Tickets[foundIndex] = ticket;
+        setTickets(
+          Tickets.map((x) => {
+            if (x.id === ticket.id) {
+              return ticket;
+            }
+            return x;
+          })
+        );
+        toggleModal();
+      });
   };
 
   return (

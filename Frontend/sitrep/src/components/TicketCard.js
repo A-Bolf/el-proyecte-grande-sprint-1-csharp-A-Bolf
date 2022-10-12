@@ -58,7 +58,6 @@ export default function TicketCard({
           size="small"
           onClick={() => {
             toggleModal();
-            console.log("CLICK" + showModal);
             setModalContent(<EditTicket ticket={update}></EditTicket>);
           }}
         >
