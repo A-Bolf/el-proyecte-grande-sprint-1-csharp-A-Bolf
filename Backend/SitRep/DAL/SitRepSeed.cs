@@ -26,12 +26,16 @@ public class SitRepSeed
                     Title = "First Test Ticket",
                     Description = "This is the First Test Ticket in the Seed()",
                     Priority = PriorityType.MEDIUM,
+                    CreatedDate = DateTime.Now,
+                    LastUpdatedDate = DateTime.Now
                 },
                 new Ticket
                 {
                     Title = "Second Test Ticket",
                     Description = "This is the Second Test Ticket in the Seed()",
                     Priority = PriorityType.LOW,
+                    CreatedDate = DateTime.Now,
+                    LastUpdatedDate = DateTime.Now
                 });
             context.SaveChanges();
         }
