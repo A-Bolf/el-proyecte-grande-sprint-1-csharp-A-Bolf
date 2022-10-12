@@ -10,30 +10,26 @@ import Box from "@mui/material/Box";
 import { API_ENDPOINT } from "../App";
 
 const EditTicket = ({ ticket }) => {
-  const { type, priority, category, status } = useContext(TicketContext);
+  const { priority, status } = useContext(TicketContext);
 
   const sendUpdatedTicket = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.values());
-    const ticket = {
+    console.log(ticket, "Current");
+    const newTicket = {
+      id: ticket.id,
       title: data.get("title"),
       description: data.get("description"),
       status: data.get("status"),
       priority: data.get("priority"),
-      type: data.get("type"),
-      //there's no due date field in the backend
-      dueDate: new Date(),
-      lastUpdatedDate: new Date(),
-      assignees: [data.get("assignee")],
+      createdDate: ticket.createdDate,
+      assignees: [{ id: 2, userName: "string", passwordHash: "string" }],
       //there is no caregory field in the backend
       //category: data.get("category"),
     };
-    console.log(ticket);
-    console.log("COLLECTED TICKET");
-    axios.put(`${API_ENDPOINT}/api/ticket/update`, ticket);
+    console.log(newTicket, "collected");
+    axios.put(`${API_ENDPOINT}/api/ticket/update`, newTicket);
   };
-  console.log(ticket);
 
   return (
     <Box
@@ -63,17 +59,6 @@ const EditTicket = ({ ticket }) => {
             ))}
           </Select>
 
-          <Select
-            id="type"
-            name="type"
-            label="Type: "
-            options={type}
-            defaultValue={ticket.type}
-          >
-            {type.map((type) => (
-              <MenuItem value={type}>{type}</MenuItem>
-            ))}
-          </Select>
           <br />
           <TextField
             name="description"
@@ -107,17 +92,7 @@ const EditTicket = ({ ticket }) => {
               <MenuItem value={priority}>{priority}</MenuItem>
             ))}
           </Select>
-          <Select
-            id="category"
-            name="category"
-            label="Category: "
-            options={category}
-            defaultValue={ticket.category}
-          >
-            {category.map((category) => (
-              <MenuItem value={category}>{category}</MenuItem>
-            ))}
-          </Select>
+
           <Button variant="contained" type="submit">
             Edit
           </Button>

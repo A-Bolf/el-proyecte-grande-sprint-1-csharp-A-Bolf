@@ -71,11 +71,10 @@ public IActionResult GetRecentUpdates()
 }
 
 [HttpPut("/api/ticket/update")]
-public IActionResult Update([FromBody] Ticket ticket)
+public IActionResult Update([FromBody] UpdateTicketRequest request)
 {
     
     UpdateTicketHandler handler = new UpdateTicketHandler(_context);
-    UpdateTicketRequest request = new UpdateTicketRequest(ticket);
     var response = handler.Handle(request);
     if (response.Failure)
     {

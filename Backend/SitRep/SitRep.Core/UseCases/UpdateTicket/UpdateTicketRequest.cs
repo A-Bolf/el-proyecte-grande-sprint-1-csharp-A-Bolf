@@ -6,10 +6,13 @@ namespace SitRep.Core.UseCases.UpdateTicket;
 
 public class UpdateTicketRequest : IRequest<Response>
 {
-    public UpdateTicketRequest(Ticket ticket)
-    {
-        Ticket = ticket;
-    }
+
+
+    public long Id { get; set; }
+    public List<User> Assignees { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public StatusType Status { get; set; }
+    public PriorityType Priority { get; set; }
     
-    public Ticket Ticket { get; set; }
 }

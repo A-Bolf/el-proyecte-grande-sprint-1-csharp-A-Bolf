@@ -15,24 +15,21 @@ public class UpdateTicketHandler : IRequestHandler<UpdateTicketRequest, Response
     
     public Response<Ticket> Handle(UpdateTicketRequest message)
     {
-        var ticketToUpdate = _context.Tickets.ToList().FirstOrDefault(ticket => ticket.Id == message.Ticket.Id,null);
+        var ticketToUpdate = _context.Tickets.ToList().FirstOrDefault(ticket => ticket.Id == message.Id,null);
         
          if (ticketToUpdate==null)
          {
              return Response.Fail<Ticket>("The ticket you are trying to update cannot be found in the database!");
          }
-         ticketToUpdate.Assignees = message.Ticket.Assignees;
-        ticketToUpdate.Description = message.Ticket.Description;
-        ticketToUpdate.Priority = message.Ticket.Priority;
-        ticketToUpdate.Status = message.Ticket.Status;
-        ticketToUpdate.Title = message.Ticket.Title;
-        ticketToUpdate.CreatedDate = message.Ticket.CreatedDate;
-        ticketToUpdate.DueDate = message.Ticket.DueDate;
-        ticketToUpdate.CreatorID = message.Ticket.CreatorID;
-        ticketToUpdate.LastUpdatedDate = message.Ticket.LastUpdatedDate;
+         ticketToUpdate.Assignees = message.Assignees;
+        ticketToUpdate.Description = message.Description;
+        ticketToUpdate.Priority = message.Priority;
+        ticketToUpdate.Status = message.Status;
+        ticketToUpdate.Title = message.Title;
+        ticketToUpdate.LastUpdatedDate = DateTime.Now;
         _context.Update(ticketToUpdate);
         _context.SaveChanges();
-        return Response.Ok(message.Ticket);
+        return Response.Ok(ticketToUpdate);
 
     }
 }

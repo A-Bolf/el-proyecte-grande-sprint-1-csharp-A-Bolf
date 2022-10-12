@@ -4,9 +4,7 @@ import { API_ENDPOINT } from "../../App";
 
 const TicketContext = createContext({});
 const status = ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"];
-const type = ["TASK", "BUG", "REQUEST", "OTHER"];
 const priority = ["LOW", "MEDIUM", "HIGH"];
-const category = ["new feature", "bugfix"];
 //gonna have to replace this with a fetch all users
 
 export const TicketProvider = ({ children }) => {
@@ -18,7 +16,7 @@ export const TicketProvider = ({ children }) => {
   //     });
   //   }, []);
   return (
-    <TicketContext.Provider value={{ type, priority, category, status }}>
+    <TicketContext.Provider value={{ priority, status }}>
       {children}
     </TicketContext.Provider>
   );

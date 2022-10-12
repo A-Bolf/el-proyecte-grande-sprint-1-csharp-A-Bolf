@@ -41,7 +41,6 @@ export default function TicketCard({
 
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {update.title} <Chip label={update.status} />
-          <Chip label={update.type} />
         </Typography>
         <Typography variant="h5" component="div"></Typography>
         <Box component="div" sx={{ display: "block", overflow: "auto" }}>

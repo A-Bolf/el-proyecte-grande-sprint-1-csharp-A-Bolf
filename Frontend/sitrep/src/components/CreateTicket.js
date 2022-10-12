@@ -11,8 +11,6 @@ const CreateTicket = () => {
       title,
       description,
       priority,
-      category,
-      type,
       DueDate: new Date(date),
     };
 
@@ -29,12 +27,9 @@ const CreateTicket = () => {
         console.log(error);
       });
   };
-  const options = ["TASK", "BUG", "REQUEST", "OTHER"];
   const [title, setTitle] = useState("");
-  const [type, setType] = useState("Task");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("low");
-  const [category, setCategory] = useState("new feature");
   const [assignee, setAssignee] = useState("user1");
   const [date, setDate] = useState(new Date());
   const [ticket, setTicket] = useState({});
@@ -43,11 +38,9 @@ const CreateTicket = () => {
       title,
       description,
       priority,
-      category,
-      type,
       DueDate: new Date(date),
     });
-  }, [title, description, priority, category, type, date]);
+  }, [title, description, priority, date]);
   return (
     <div>
       <p style={{ fontWeight: "bold" }}>Add Issue</p>
@@ -55,11 +48,6 @@ const CreateTicket = () => {
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <CreateTicketButtons Ticket={ticket} />
-          <Dropdown
-            label={"Ticket Type: "}
-            options={options}
-            toChange={setType}
-          />
           <div className="text-container">
             <TextField
               color="error"
@@ -92,11 +80,6 @@ const CreateTicket = () => {
               label="Priority: "
               options={["low", "medium", "high"]}
               toChange={setPriority}
-            />
-            <Dropdown
-              label="Category: "
-              options={["new feature", "bugfix"]}
-              toChange={setCategory}
             />
             <br />
             Date:
