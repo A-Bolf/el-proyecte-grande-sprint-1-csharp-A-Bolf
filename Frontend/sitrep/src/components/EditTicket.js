@@ -24,8 +24,6 @@ const EditTicket = ({ ticket }) => {
       priority: data.get("priority"),
       createdDate: ticket.createdDate,
       assignees: [{ id: 2, userName: "string", passwordHash: "string" }],
-      //there is no caregory field in the backend
-      //category: data.get("category"),
     };
     console.log(newTicket, "collected");
     axios.put(`${API_ENDPOINT}/api/ticket/update`, newTicket);

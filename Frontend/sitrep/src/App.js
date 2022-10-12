@@ -1,7 +1,7 @@
 import Layout from "./components/Layout";
 import Dashboard from "./components/DashBoard";
 import CreateTicket from "./components/CreateTicket";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { options } from "./components/StackedBarChart";
 import LoadScreen from "./components/LoadScreen";
@@ -9,7 +9,9 @@ import axios from "axios";
 import IssuesPage from "./components/IssuesPage";
 import Register from "./components/Registration/Register";
 import { ModalProvider } from "./components/Context/ModalContext";
-import { TicketProvider } from "./components/Context/TicketContext";
+import TicketContext, {
+  TicketProvider,
+} from "./components/Context/TicketContext";
 import UserProfile from "./components/UserProfile/UserProfile";
 export const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
@@ -49,7 +51,8 @@ function App() {
     });
     return StatusData;
   };
-  const [Tickets, setTickets] = useState([]);
+  const { fetchTickets, Tickets, setTickets } = useContext(TicketContext);
+
   const [isLoading, setIsLoading] = useState(true);
   const [StatusCounts, setStatusCounts] = useState({});
   const [Updates, setUpdates] = useState([]);
@@ -66,6 +69,7 @@ function App() {
   useEffect(() => {
     if (isLoading) {
       console.log("fetching");
+      fetchTickets();
       axios.get(`${API_ENDPOINT}/api/ticket`).then((res) => {
         setTickets(res.data);
       });
@@ -84,28 +88,26 @@ function App() {
   }
   return (
     <div className="app">
-      <TicketProvider>
-        <ModalProvider>
-          <Routes>
-            <Route path="app/*" element={<Layout />}>
-              <Route
-                path="dashboard"
-                element={
-                  <Dashboard
-                    updates={Updates}
-                    StatusCounts={StatusCounts}
-                    onTicketDelete={onTicketDelete}
-                  />
-                }
-              />
+      <ModalProvider>
+        <Routes>
+          <Route path="app/*" element={<Layout />}>
+            <Route
+              path="dashboard"
+              element={
+                <Dashboard
+                  updates={Updates}
+                  StatusCounts={StatusCounts}
+                  onTicketDelete={onTicketDelete}
+                />
+              }
+            />
 
-              <Route path="add-issue" element={<CreateTicket />} />
-              <Route path="issues" element={<IssuesPage tickets={Tickets} />} />
-              <Route path="Profile" element={<UserProfile />} />
-            </Route>
-          </Routes>
-        </ModalProvider>
-      </TicketProvider>
+            <Route path="add-issue" element={<CreateTicket />} />
+            <Route path="issues" element={<IssuesPage tickets={Tickets} />} />
+            <Route path="Profile" element={<UserProfile />} />
+          </Route>
+        </Routes>
+      </ModalProvider>
     </div>
   );
 }

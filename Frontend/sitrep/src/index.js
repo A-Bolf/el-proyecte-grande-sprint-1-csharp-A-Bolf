@@ -6,16 +6,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing";
+import { TicketProvider } from "./components/Context/TicketContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        <Routes>
-          <Route index path="/" element={<Landing />} />
-          <Route path="/*" element={<App />} />
-        </Routes>
+        <TicketProvider>
+          <Routes>
+            <Route index path="/" element={<Landing />} />
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </TicketProvider>
       </AuthProvider>
     </Router>
   </React.StrictMode>
