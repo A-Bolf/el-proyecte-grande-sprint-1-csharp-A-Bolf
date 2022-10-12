@@ -22,6 +22,8 @@ public class CreateTicketHandler : IRequestHandler<CreateTicketRequest, Response
         {
             return Response.Fail<List<Ticket>>("FAil!");
         }
+        message.Ticket.LastUpdatedDate=DateTime.Now;
+        message.Ticket.CreatedDate=DateTime.Now;
         _context.Tickets.AddRange(message.Ticket);
         _context.SaveChanges();
         
