@@ -9,7 +9,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SitRep.Core;
 using SitRep.DAL;
-using SitRep.Models;
 using Swashbuckle.AspNetCore.Filters;
 
 const string AllowedDevelopmentOrigin = "_allowedDevelopmentOrigin";

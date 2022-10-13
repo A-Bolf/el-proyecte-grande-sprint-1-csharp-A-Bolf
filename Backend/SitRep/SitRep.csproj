@@ -58,6 +58,46 @@
       <_ContentIncludedByDefault Remove="SitRep.Tests\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="SitRep.Tests\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="SitRep.Tests\obj\SitRep.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\amd64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\arm64\VanguardInstrumentationProfiler_arm64.config" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\CodeCoverage.config" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\VanguardInstrumentationProfiler_x86.config" />
+      <_ContentIncludedByDefault Remove="out\InstrumentationEngine\alpine\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\InstrumentationEngine\macos\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\InstrumentationEngine\ubuntu\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\amd64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\arm64\VanguardInstrumentationProfiler_arm64.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\CodeCoverage.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\VanguardInstrumentationProfiler_x86.config" />
+      <_ContentIncludedByDefault Remove="out\out\InstrumentationEngine\alpine\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\InstrumentationEngine\macos\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\InstrumentationEngine\ubuntu\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\web.config" />
+      <_ContentIncludedByDefault Remove="out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\SitRep.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\SitRep.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\bin\Debug\net6.0\Tests.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\bin\Debug\net6.0\Tests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="out\SitRep.deps.json" />
+      <_ContentIncludedByDefault Remove="out\SitRep.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\bin\Debug\net6.0\Tests.deps.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\bin\Debug\net6.0\Tests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\Tests.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
 </Project>

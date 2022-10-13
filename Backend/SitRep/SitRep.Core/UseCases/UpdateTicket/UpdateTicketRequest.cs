@@ -1,6 +1,5 @@
 using SitRep.Core.Domain;
 using SitRep.Core.Entities;
-using SitRep.Models;
 
 namespace SitRep.Core.UseCases.UpdateTicket;
 

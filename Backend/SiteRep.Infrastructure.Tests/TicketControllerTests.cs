@@ -1,12 +1,7 @@
 using FluentAssertions;
-using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
-using SiteRep.Infrastructure.Tests.Common;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using SitRep.Core.Entities;
-using SitRep.Models;
 
 namespace SiteRep.Infrastructure.Tests
 {

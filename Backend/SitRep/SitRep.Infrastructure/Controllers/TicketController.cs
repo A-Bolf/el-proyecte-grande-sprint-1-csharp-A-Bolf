@@ -1,17 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SitRep.Core;
+using Microsoft.Extensions.Logging;
 using SitRep.Core.Entities;
 using SitRep.Core.UseCases.CreateTicket;
 using SitRep.Core.UseCases.DeleteTicket;
 using SitRep.Core.UseCases.GetAllTickets;
 using SitRep.Core.UseCases.UpdateTicket;
-using SitRep.DAL;
-using SitRep.DAL;
-using SitRep.Models;
-using SitRep.SitRep.Core.DTOs;
-
-namespace SitRep.Controllers;
 
 [ApiController]
 [Authorize]
@@ -29,7 +23,7 @@ public class TicketController : ControllerBase
     }
     
     [HttpGet("/api/ticket")]
-    public ActionResult<List<Core.Entities.Ticket>> GetAll()
+    public ActionResult<List<Ticket>> GetAll()
     {
         var ticketHandler = new GetAllTicketsHandler(_context);
         var ticketResponse = ticketHandler.Handle();
