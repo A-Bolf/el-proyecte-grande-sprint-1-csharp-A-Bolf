@@ -11,21 +11,24 @@ import ModalContext from "./Context/ModalContext";
 import { API_ENDPOINT } from "../App";
 
 const EditTicket = ({ ticket }) => {
-  const { priority, status, setTickets, Tickets } = useContext(TicketContext);
+  const { priority, status, setTickets, Tickets, fetchAssignees, assignees } =
+    useContext(TicketContext);
+  console.log("ASSIGNEES IN EDIT TICKET", assignees);
   const { toggleModal } = useContext(ModalContext);
   const sendUpdatedTicket = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     console.log(ticket, "Current");
+    const getUserById = (id) => {
+      let ret = assignees.filter((x) => {
+        return x.id == id;
+      });
+      return ret;
+    };
     const newTicket = {
       id: ticket.id,
-      assignees: [
-        {
-          id: 0,
-          userName: "string",
-          passwordHash: "string",
-        },
-      ],
+      assignees: getUserById(data.get("assignee")),
       title: data.get("title"),
       description: data.get("description"),
       status: data.get("status"),
@@ -93,11 +96,11 @@ const EditTicket = ({ ticket }) => {
             id="assignee"
             name="assignee"
             label="Assignee: "
-            options={["User1", "User2"]}
-            defaultValue={ticket.assignees}
+            options={assignees}
+            defaultValue={assignees[0]}
           >
-            {["User1", "User2"].map((user) => (
-              <MenuItem value={user}>{user}</MenuItem>
+            {assignees.map((user) => (
+              <MenuItem value={user.id}>{user.userName}</MenuItem>
             ))}
           </Select>
           <Select

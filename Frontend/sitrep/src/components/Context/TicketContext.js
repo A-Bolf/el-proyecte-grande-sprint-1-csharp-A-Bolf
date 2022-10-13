@@ -15,13 +15,29 @@ export const TicketProvider = ({ children }) => {
     axios.get(`${API_ENDPOINT}/api/ticket`).then((res) => {
       setTickets(res.data);
     });
-
-    //fetch all users from backend here
   };
-  console.log(Tickets, "CONTEXT TICKETS");
+  const fetchAssignees = () => {
+    axios.get(`${API_ENDPOINT}/api/Auth/AllUsers`).then((response) => {
+      console.log("ASSIGNEES", response.data);
+      setAssignees(response.data);
+    });
+  };
+
+  if (assignees.length === 0) {
+    fetchAssignees();
+    console.log("FIRST FETCH", assignees);
+  }
   return (
     <TicketContext.Provider
-      value={{ priority, status, Tickets, setTickets, fetchTickets }}
+      value={{
+        priority,
+        status,
+        Tickets,
+        setTickets,
+        fetchTickets,
+        fetchAssignees,
+        assignees,
+      }}
     >
       {children}
     </TicketContext.Provider>
