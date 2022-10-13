@@ -14,6 +14,7 @@ using SitRep.SitRep.Core.DTOs;
 namespace SitRep.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("/api/ticket")]
 public class TicketController : ControllerBase
 {
@@ -26,7 +27,7 @@ public class TicketController : ControllerBase
         _context = sitRepContext;
         _ticketService = ticketService;
     }
-
+    
     [HttpGet("/api/ticket")]
     public ActionResult<List<Core.Entities.Ticket>> GetAll()
     {

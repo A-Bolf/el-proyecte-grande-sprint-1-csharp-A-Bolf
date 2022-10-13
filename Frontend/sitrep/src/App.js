@@ -7,13 +7,18 @@ import { options } from "./components/StackedBarChart";
 import LoadScreen from "./components/LoadScreen";
 import axios from "axios";
 import IssuesPage from "./components/IssuesPage";
-import Register from "./components/Registration/Register";
 import { ModalProvider } from "./components/Context/ModalContext";
 import TicketContext, {
   TicketProvider,
 } from "./components/Context/TicketContext";
 import UserProfile from "./components/UserProfile/UserProfile";
 export const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  config.headers.authorization = `Bearer ${token}`;
+  return config;
+});
 
 const convertDate = (tickets) => {
   tickets.forEach((ticket) => {
