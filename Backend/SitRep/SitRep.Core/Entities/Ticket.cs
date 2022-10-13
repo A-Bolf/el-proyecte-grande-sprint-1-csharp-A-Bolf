@@ -9,7 +9,6 @@ public class Ticket: EntityBase
     public string Description { get; set; }
     public StatusType Status { get; set; }
     public PriorityType Priority { get; set; }
-    public TicketType Type { get; set; }
     public DateTime DueDate { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime LastUpdatedDate { get; set; }
@@ -23,7 +22,6 @@ public class Ticket: EntityBase
         Description = dto.Description;
         Status = dto.Status;
         Priority = dto.Priority;
-        Type = dto.Type;
         DueDate = dto.DueDate;
         LastUpdatedDate = dto.LastUpdatedDate;
         Assignees = dto.Assignees;

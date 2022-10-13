@@ -7,33 +7,51 @@ import axios from "axios";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
+import ModalContext from "./Context/ModalContext";
 import { API_ENDPOINT } from "../App";
 
 const EditTicket = ({ ticket }) => {
-  const { type, priority, category, status } = useContext(TicketContext);
-
+  const { priority, status, setTickets, Tickets, fetchAssignees, assignees } =
+    useContext(TicketContext);
+  console.log("ASSIGNEES IN EDIT TICKET", assignees);
+  const { toggleModal } = useContext(ModalContext);
   const sendUpdatedTicket = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    console.log(data.values());
-    const ticket = {
+    console.log(ticket, "Current");
+    const getUserById = (id) => {
+      let ret = assignees.filter((x) => {
+        return x.id == id;
+      });
+      return ret;
+    };
+    const newTicket = {
+      id: ticket.id,
+      assignees: getUserById(data.get("assignee")),
       title: data.get("title"),
       description: data.get("description"),
       status: data.get("status"),
       priority: data.get("priority"),
-      type: data.get("type"),
-      //there's no due date field in the backend
-      dueDate: new Date(),
-      lastUpdatedDate: new Date(),
-      assignees: [data.get("assignee")],
-      //there is no caregory field in the backend
-      //category: data.get("category"),
     };
-    console.log(ticket);
-    console.log("COLLECTED TICKET");
-    axios.put(`${API_ENDPOINT}/api/ticket/update`, ticket);
+    console.log(newTicket, "collected");
+    axios
+      .put(`${API_ENDPOINT}/api/ticket/update`, newTicket)
+      .then((response) => {
+        let ticket = response.data;
+        var foundIndex = Tickets.findIndex((x) => x.id === ticket.id);
+        Tickets[foundIndex] = ticket;
+        setTickets(
+          Tickets.map((x) => {
+            if (x.id === ticket.id) {
+              return ticket;
+            }
+            return x;
+          })
+        );
+        toggleModal();
+      });
   };
-  console.log(ticket);
 
   return (
     <Box
@@ -63,17 +81,6 @@ const EditTicket = ({ ticket }) => {
             ))}
           </Select>
 
-          <Select
-            id="type"
-            name="type"
-            label="Type: "
-            options={type}
-            defaultValue={ticket.type}
-          >
-            {type.map((type) => (
-              <MenuItem value={type}>{type}</MenuItem>
-            ))}
-          </Select>
           <br />
           <TextField
             name="description"
@@ -89,11 +96,11 @@ const EditTicket = ({ ticket }) => {
             id="assignee"
             name="assignee"
             label="Assignee: "
-            options={["User1", "User2"]}
-            defaultValue={ticket.assignees}
+            options={assignees}
+            defaultValue={assignees[0]}
           >
-            {["User1", "User2"].map((user) => (
-              <MenuItem value={user}>{user}</MenuItem>
+            {assignees.map((user) => (
+              <MenuItem value={user.id}>{user.userName}</MenuItem>
             ))}
           </Select>
           <Select
@@ -107,17 +114,7 @@ const EditTicket = ({ ticket }) => {
               <MenuItem value={priority}>{priority}</MenuItem>
             ))}
           </Select>
-          <Select
-            id="category"
-            name="category"
-            label="Category: "
-            options={category}
-            defaultValue={ticket.category}
-          >
-            {category.map((category) => (
-              <MenuItem value={category}>{category}</MenuItem>
-            ))}
-          </Select>
+
           <Button variant="contained" type="submit">
             Edit
           </Button>

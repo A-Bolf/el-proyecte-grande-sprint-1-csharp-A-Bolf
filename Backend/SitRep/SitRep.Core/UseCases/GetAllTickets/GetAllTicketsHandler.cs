@@ -20,6 +20,6 @@ public class GetAllTicketsHandler : IQueryHandler<Response<List<Ticket>>>
             return Response.Fail<List<Ticket>>("No Tickets In DB");
         }
 
-        return Response.Ok(_context.Tickets.ToList());
+        return Response.Ok(tickets);
     }
 }

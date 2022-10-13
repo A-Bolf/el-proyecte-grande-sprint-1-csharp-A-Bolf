@@ -13,6 +13,7 @@ public class CreateTicketHandler : IRequestHandler<CreateTicketRequest, Response
 
     public Response<List<Ticket>> Handle(CreateTicketRequest message)
     {
+        
         var tickets = _context.Tickets.ToList();
         if (message.Ticket.Title=="")
         {
@@ -22,8 +23,8 @@ public class CreateTicketHandler : IRequestHandler<CreateTicketRequest, Response
         {
             return Response.Fail<List<Ticket>>("FAil!");
         }
-        message.Ticket.LastUpdatedDate=DateTime.Now;
         message.Ticket.CreatedDate=DateTime.Now;
+        message.Ticket.LastUpdatedDate=DateTime.Now;
         _context.Tickets.AddRange(message.Ticket);
         _context.SaveChanges();
         
