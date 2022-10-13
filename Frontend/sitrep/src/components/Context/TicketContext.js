@@ -10,11 +10,13 @@ const priority = ["LOW", "MEDIUM", "HIGH"];
 
 export const TicketProvider = ({ children }) => {
   const [Tickets, setTickets] = useState([]);
+  const [assignees, setAssignees] = useState([]);
   const fetchTickets = () => {
     axios.get(`${API_ENDPOINT}/api/ticket`).then((res) => {
       setTickets(res.data);
-      console.log(res.data, "RESPONSE");
     });
+
+    //fetch all users from backend here
   };
   console.log(Tickets, "CONTEXT TICKETS");
   return (

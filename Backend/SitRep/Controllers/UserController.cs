@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SitRep.Core;
 using SitRep.Core.Entities;
+using SitRep.Core.UseCases.GetAllTickets;
+using SitRep.Core.UseCases.GetAllUsers;
 using SitRep.Core.UseCases.RegisterUser;
 using SitRep.Core.UseCases.UpdatePassword;
 using SitRep.Core.UseCases.UserLogin;
@@ -75,6 +77,23 @@ public class AuthController : ControllerBase
         }
 
         return Ok(response);
+    }
+
+    [HttpGet("AllUsers")]
+    public ActionResult<List<User>> GetAllUsers()
+    {
+        var userHandler = new GetAllUsersHandler(_context);
+        var userResponse = userHandler.Handle();
+        if (userResponse.Failure)
+        {
+            _logger.LogError(userResponse.Error);
+        }
+        else
+        {
+            _logger.LogInformation("GetAllTickets Success!");
+        }
+
+        return userResponse.Value;
     }
 
 }
