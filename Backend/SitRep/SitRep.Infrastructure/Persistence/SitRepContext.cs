@@ -1,10 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using SitRep.Core;
 using SitRep.Core.Entities;
-
-
-namespace SitRep.DAL;
 
 public class SitRepContext:DbContext, ISitRepContext
 {

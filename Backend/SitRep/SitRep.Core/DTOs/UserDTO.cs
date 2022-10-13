@@ -1,5 +1,3 @@
-namespace SitRep.Models;
-
 public class UserDTO
 {
     public string UserName { get; set;}

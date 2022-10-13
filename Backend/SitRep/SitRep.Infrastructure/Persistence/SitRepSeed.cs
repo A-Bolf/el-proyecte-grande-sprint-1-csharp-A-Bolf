@@ -1,10 +1,4 @@
-
 using SitRep.Core.Entities;
-
-namespace SitRep.DAL;
-
-using Microsoft.EntityFrameworkCore;
-
 public class SitRepSeed
 {
     private readonly SitRepContext context;
@@ -21,7 +15,7 @@ public class SitRepSeed
         if (!context.Tickets.Any())
         {
             context.Tickets.AddRange(
-                new Ticket
+                new SitRep.Core.Entities.Ticket
                 {
                     Title = "First Test Ticket",
                     Description = "This is the First Test Ticket in the Seed()",

@@ -1,5 +1,4 @@
 using SitRep.Core.Domain;
-using SitRep.Models;
 
 namespace SitRep.Core.Entities;
 

@@ -1,20 +1,12 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using SitRep.Core;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using SitRep.Core.Entities;
-using SitRep.Core.UseCases.GetAllTickets;
 using SitRep.Core.UseCases.GetAllUsers;
 using SitRep.Core.UseCases.RegisterUser;
 using SitRep.Core.UseCases.UpdatePassword;
 using SitRep.Core.UseCases.UserLogin;
-using SitRep.DAL;
-using SitRep.Models;
-
-namespace SitRep.Controllers;
 
 [Route("/api/[controller]")]
 [ApiController]
@@ -80,7 +72,7 @@ public class AuthController : ControllerBase
 
         return Ok(response);
     }
-
+    [Authorize]
     [HttpGet("AllUsers")]
     public ActionResult<List<User>> GetAllUsers()
     {

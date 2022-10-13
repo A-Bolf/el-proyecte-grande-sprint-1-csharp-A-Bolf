@@ -1,3 +1,4 @@
+
 using SitRep.Core.Entities;
 
 namespace SitRep.Core.UseCases.CreateTicket;

@@ -2,7 +2,6 @@ using System.Security.Cryptography;
 using SitRep.Core.Domain;
 using SitRep.Core.Entities;
 using SitRep.Core.UseCases.RegisterUser;
-using SitRep.Models;
 
 
 public static class UserExtensions

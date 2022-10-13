@@ -1,6 +1,5 @@
 using SitRep.Core.Entities;
 
-namespace SitRep.Models;
 
 public class TicketDTO
 {
