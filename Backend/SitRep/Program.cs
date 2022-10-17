@@ -1,14 +1,10 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SitRep.Core;
-using SitRep.DAL;
+using SitRep.Infrastructure.Persistence;
+using SitRep.Infrastructure.Service;
 using Swashbuckle.AspNetCore.Filters;
 
 const string AllowedDevelopmentOrigin = "_allowedDevelopmentOrigin";
