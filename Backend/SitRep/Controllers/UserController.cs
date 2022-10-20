@@ -1,13 +1,14 @@
-using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SitRep.Core;
 using SitRep.Core.Entities;
+using SitRep.Core.Extensions;
 using SitRep.Core.UseCases.GetAllUsers;
 using SitRep.Core.UseCases.RegisterUser;
-using SitRep.Core.UseCases.UpdatePassword;
 using SitRep.Core.UseCases.UserLogin;
-using SitRep.Infrastructure.Persistence;
 using SitRep.Infrastructure.Service;
+using SitRep.UseCases.RegisterUser;
+using SitRep.UseCases.UpdatePassword;
 
 namespace SitRep.Controllers;
 
@@ -42,6 +43,7 @@ public class AuthController : ControllerBase
 
         _logger.LogInformation("User registered");
         var registerUserResponse = response.Value.ToRegisterUserResponse();
+
         return (Ok(registerUserResponse));
     }
 

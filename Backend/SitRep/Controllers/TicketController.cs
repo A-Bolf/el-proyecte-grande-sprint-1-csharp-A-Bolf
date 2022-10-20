@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SitRep.Core;
 using SitRep.Core.Entities;
 using SitRep.Core.UseCases.CreateTicket;
 using SitRep.Core.UseCases.DeleteTicket;

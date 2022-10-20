@@ -1,6 +1,6 @@
 using SitRep.Core.Domain;
 
-namespace SitRep.Core.UseCases.UpdatePassword;
+namespace SitRep.UseCases.UpdatePassword;
 
 public class UpdatePasswordRequest:IRequest, IRequest<Response>
 {

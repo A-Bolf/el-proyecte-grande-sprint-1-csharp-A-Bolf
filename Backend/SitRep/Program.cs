@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SitRep.Core;
 using SitRep.Infrastructure.Persistence;
 using SitRep.Infrastructure.Service;
 using Swashbuckle.AspNetCore.Filters;

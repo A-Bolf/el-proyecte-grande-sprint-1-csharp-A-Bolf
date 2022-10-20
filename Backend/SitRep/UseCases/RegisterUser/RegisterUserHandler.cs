@@ -1,7 +1,9 @@
+using SitRep.Core;
 using SitRep.Core.Entities;
+using SitRep.Core.UseCases.RegisterUser;
 using SitRep.Infrastructure.Persistence;
 
-namespace SitRep.Core.UseCases.RegisterUser;
+namespace SitRep.UseCases.RegisterUser;
 
 public class RegisterUserHandler : IRequestHandler<RegisterUserRequest, Response<User>>
 {

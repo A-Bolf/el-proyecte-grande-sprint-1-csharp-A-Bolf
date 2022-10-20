@@ -1,7 +1,7 @@
-
+using SitRep.Core;
 using SitRep.Infrastructure.Persistence;
 
-namespace SitRep.Core.UseCases.UpdatePassword;
+namespace SitRep.UseCases.UpdatePassword;
 
 public class UpdatePasswordHandler : IRequestHandler<UpdatePasswordRequest,Response>
 {
@@ -16,7 +16,7 @@ public class UpdatePasswordHandler : IRequestHandler<UpdatePasswordRequest,Respo
     {
         var username = message.Username;
         var password = message.Password;
-        User user = _context.Users.ToList().FirstOrDefault(u=>u.UserName==username,null);
+        var user = _context.Users.ToList().FirstOrDefault(u=>u.UserName==username,null);
         if (user == null)
         {
             return  Response.Fail($"User {username} does not exist");

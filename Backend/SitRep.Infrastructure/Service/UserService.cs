@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SitRep.Core.Entities;
+using SitRep.Core.Extensions;
 using SitRep.Infrastructure.Persistence;
 
 namespace SitRep.Infrastructure.Service;
