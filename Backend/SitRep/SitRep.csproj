@@ -8,34 +8,14 @@
 		<UserSecretsId>3c6221ec-83b2-4e87-8f18-c086886a5b56</UserSecretsId>
 	</PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="BCrypt.Net" Version="0.1.0" />
-        <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.22.1" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
-        <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.3.1" />
-        <PackageReference Include="NUnit" Version="3.13.3" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.5" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
-    </ItemGroup>
-	<ItemGroup>
+   	<ItemGroup>
 		<PackageReference Include="BCrypt.Net" Version="0.1.0" />
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.8" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -50,7 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="SitRep.Tests" />
 		<InternalsVisibleTo Include="SitRep.Infrastrucure.Tests" />
 	</ItemGroup>
 
@@ -58,6 +37,51 @@
       <_ContentIncludedByDefault Remove="SitRep.Tests\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="SitRep.Tests\obj\project.packagespec.json" />
       <_ContentIncludedByDefault Remove="SitRep.Tests\obj\SitRep.Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\amd64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\arm64\VanguardInstrumentationProfiler_arm64.config" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\CodeCoverage.config" />
+      <_ContentIncludedByDefault Remove="out\CodeCoverage\VanguardInstrumentationProfiler_x86.config" />
+      <_ContentIncludedByDefault Remove="out\InstrumentationEngine\alpine\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\InstrumentationEngine\macos\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\InstrumentationEngine\ubuntu\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\amd64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\arm64\VanguardInstrumentationProfiler_arm64.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\CodeCoverage.config" />
+      <_ContentIncludedByDefault Remove="out\out\CodeCoverage\VanguardInstrumentationProfiler_x86.config" />
+      <_ContentIncludedByDefault Remove="out\out\InstrumentationEngine\alpine\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\InstrumentationEngine\macos\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\InstrumentationEngine\ubuntu\x64\VanguardInstrumentationProfiler_x64.config" />
+      <_ContentIncludedByDefault Remove="out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\web.config" />
+      <_ContentIncludedByDefault Remove="out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\SitRep.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\SitRep.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\bin\Debug\net6.0\Tests.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\bin\Debug\net6.0\Tests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="out\out\Tests\obj\Tests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="out\SitRep.deps.json" />
+      <_ContentIncludedByDefault Remove="out\SitRep.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\bin\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\bin\Debug\net6.0\Tests.deps.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\bin\Debug\net6.0\Tests.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\Debug\net6.0\MvcTestingAppManifest.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="out\Tests\obj\Tests.csproj.nuget.dgspec.json" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SitRep.Infrastructure\SitRep.Infrastructure.csproj" />
+    </ItemGroup>
+    
 
 </Project>

@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   let navigate = useNavigate();
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(localStorage.getItem("token"));
   const [errMsg, setErrMsg] = useState("");
 
   const registerFetch = (data) => {

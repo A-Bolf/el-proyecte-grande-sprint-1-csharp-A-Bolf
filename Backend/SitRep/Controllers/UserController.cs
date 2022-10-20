@@ -1,18 +1,14 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using SitRep.Core;
 using SitRep.Core.Entities;
-using SitRep.Core.UseCases.GetAllTickets;
+using SitRep.Core.Extensions;
 using SitRep.Core.UseCases.GetAllUsers;
 using SitRep.Core.UseCases.RegisterUser;
-using SitRep.Core.UseCases.UpdatePassword;
 using SitRep.Core.UseCases.UserLogin;
-using SitRep.DAL;
-using SitRep.Models;
+using SitRep.Infrastructure.Service;
+using SitRep.UseCases.RegisterUser;
+using SitRep.UseCases.UpdatePassword;
 
 namespace SitRep.Controllers;
 
@@ -25,7 +21,8 @@ public class AuthController : ControllerBase
     private readonly ISitRepContext _context;
     private IConfiguration _configuration;
 
-    public AuthController(IUserService userService, ISitRepContext sitRepContext, ILogger<AuthController> logger,IConfiguration configuration)
+    public AuthController(IUserService userService, ISitRepContext sitRepContext, ILogger<AuthController> logger,
+        IConfiguration configuration)
     {
         _logger = logger;
         _context = sitRepContext;
@@ -43,8 +40,10 @@ public class AuthController : ControllerBase
             _logger.LogError(response.Error);
             return BadRequest(response.Error);
         }
+
         _logger.LogInformation("User registered");
         var registerUserResponse = response.Value.ToRegisterUserResponse();
+
         return (Ok(registerUserResponse));
     }
 
@@ -64,14 +63,13 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpPost("UpdatePassword")]
-    public async Task<ActionResult> UpdatePassword([FromBody]UpdatePasswordRequest request)
+    public async Task<ActionResult> UpdatePassword([FromBody] UpdatePasswordRequest request)
     {
         var handler = new UpdatePasswordHandler(_context);
         var response = handler.Handle(request);
         if (response.Failure)
         {
             _logger.LogError("Password Change Failed");
-
         }
         else
         {
@@ -81,6 +79,7 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpGet("AllUsers")]
     public ActionResult<List<User>> GetAllUsers()
     {
@@ -97,5 +96,4 @@ public class AuthController : ControllerBase
 
         return userResponse.Value;
     }
-
 }
