@@ -121,3 +121,11 @@ code {
 .create-ticket-button {
   float: right;
 }
+
+.editTicketItemContainer *{
+  margin: 2%;
+  
+}
+.content{
+  margin: 20px;
+}
