@@ -82,6 +82,10 @@
     <ItemGroup>
       <ProjectReference Include="..\SitRep.Infrastructure\SitRep.Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
     
 
 </Project>
