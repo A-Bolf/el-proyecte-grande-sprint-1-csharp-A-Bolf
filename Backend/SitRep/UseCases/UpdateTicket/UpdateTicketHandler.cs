@@ -23,7 +23,10 @@ public class UpdateTicketHandler : IRequestHandler<UpdateTicketRequest, Response
          {
              return Response.Fail<Ticket>("The ticket you are trying to update cannot be found in the database!");
          }
-         ticketToUpdate.Assignees = message.Assignees;
+
+         var assignee = _context.Users.ToList().FirstOrDefault(user => user.Id == message.AssigneeId, null);
+
+        ticketToUpdate.Assignee = assignee;
         ticketToUpdate.Description = message.Description;
         ticketToUpdate.Priority = message.Priority;
         ticketToUpdate.Status = message.Status;

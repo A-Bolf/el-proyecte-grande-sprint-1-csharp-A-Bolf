@@ -12,7 +12,7 @@ public class Ticket: EntityBase
     public DateTime DueDate { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime LastUpdatedDate { get; set; }
-    public List<User> Assignees { get; set; }
+    public virtual User Assignee { get; set; }
     public int CreatorID { get; set; }
 
 
@@ -24,7 +24,7 @@ public class Ticket: EntityBase
         Priority = dto.Priority;
         DueDate = dto.DueDate;
         LastUpdatedDate = dto.LastUpdatedDate;
-        Assignees = dto.Assignees;
+        Assignee = dto.Assignee;
         CreatorID = dto.CreatorID;
     }
 

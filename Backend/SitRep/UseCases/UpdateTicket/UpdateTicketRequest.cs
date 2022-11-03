@@ -8,7 +8,7 @@ public class UpdateTicketRequest : IRequest<Response>
 
 
     public long Id { get; set; }
-    public List<User> Assignees { get; set; }
+    public int AssigneeId { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public StatusType Status { get; set; }

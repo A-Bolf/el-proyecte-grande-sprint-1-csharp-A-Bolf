@@ -51,8 +51,7 @@ public class SitRepSeed
                 Priority = PriorityType.MEDIUM,
                 CreatedDate = DateTime.Now,
                 LastUpdatedDate = DateTime.Now,
-                Assignees = new List<User>
-                    { new User { UserName = "FirstUser", PasswordHash = BCrypt.Net.BCrypt.HashPassword("pass") } }
+                Assignee = new User { UserName = "FirstUser", PasswordHash = BCrypt.Net.BCrypt.HashPassword("pass") } 
             };
             Ticket SecondTicket = new Ticket
             {
@@ -61,8 +60,7 @@ public class SitRepSeed
                 Priority = PriorityType.LOW,
                 CreatedDate = DateTime.Now,
                 LastUpdatedDate = DateTime.Now,
-                Assignees = new List<User>
-                    { new User { UserName = "SecondUser", PasswordHash = BCrypt.Net.BCrypt.HashPassword("pass") } }
+                Assignee =new User { UserName = "SecondUser", PasswordHash = BCrypt.Net.BCrypt.HashPassword("pass") }
             };
             Console.WriteLine("asd");
             context.Tickets.AddRange(FirstTicket, SecondTicket

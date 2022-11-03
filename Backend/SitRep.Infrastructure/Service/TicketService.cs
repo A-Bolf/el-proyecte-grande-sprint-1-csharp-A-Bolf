@@ -58,7 +58,7 @@ public class TicketService : ITicketService
     public void Delete(int id)
     {
         var ticket = GetById(id);
-        ticket.Assignees = null;
+        ticket.Assignee = null;
         _context.Tickets.Remove(ticket);
         _context.SaveChanges();
     }
